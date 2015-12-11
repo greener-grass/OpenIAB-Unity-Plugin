@@ -44,6 +44,11 @@ public class OpenIABEventManager : MonoBehaviour
      * Failed QueryInventory callback.
      */
     public static event Action<string> queryInventoryFailedEvent;
+
+    /**
+     * Deferred purchase callback
+     */
+    public static event Action purchaseDeferredEvent;
     
     /**
      * Successful purchase callback. Fired after purchase of a product or a subscription
@@ -212,6 +217,12 @@ public class OpenIABEventManager : MonoBehaviour
     {
         if (queryInventoryFailedEvent != null)
             queryInventoryFailedEvent(error);
+    }
+
+    private void OnPurchaseDeferred(string empty)
+    {
+        if (purchaseDeferredEvent != null)
+            purchaseDeferredEvent();
     }
 
     private void OnPurchaseSucceeded(string json)

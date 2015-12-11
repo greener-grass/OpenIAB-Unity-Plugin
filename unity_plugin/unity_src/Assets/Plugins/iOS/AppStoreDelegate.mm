@@ -224,6 +224,10 @@ NSMutableArray* m_skuMap;
     {
         switch (transaction.transactionState)
         {
+            case SKPaymentTransactionStateDeferred:
+                UnitySendMessage(EventHandler, "OnPurchaseDeferred", "");
+                break;
+
             case SKPaymentTransactionStateFailed:
                 if (transaction.error == nil)
                     UnitySendMessage(EventHandler, "OnPurchaseFailed", MakeStringCopy("Transaction failed"));
